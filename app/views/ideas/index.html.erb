@@ -1,0 +1,5 @@
+ <div class="d-flex align-content-stretch flex-wrap">
+<% @idea.each do |idea| %>
+        <div class="list-group-item p-2 m-2" style="min-width: 350px; width: 31%; max-width: 95vw; word-wrap: break-word;"><%= link_to idea.title, idea_path(idea) %><p class="card-text"><%= idea.description %></p></div>
+<% end %>
+    </div>

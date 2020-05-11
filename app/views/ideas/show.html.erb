@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><%= @idea.title %></h5>
+    
+        <p class="card-text"> <%= @idea.description %></p>
+
+     
+    
+        <%= link_to "Edit idea", edit_idea_path(@idea), class: "btn btn-primary" %>
+        <%= link_to 'Delete idea', 
+            idea_path(@idea), 
+            class: "btn btn-danger",
+            method: :delete, 
+            data: { confirm: 'Are you sure that you want to delete this post? '} 
+        %>
+      </div>
+</div>
+
+
+
+
