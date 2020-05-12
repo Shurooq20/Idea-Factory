@@ -42,6 +42,7 @@ class IdeasController < ApplicationController
             @idea = Idea.find params[:id]
             @review = Review.new
             @reviews = @idea.reviews.order(created_at: :DESC)
+            @like = @idea.likes.find_by(user: current_user)
         
     end
     ####################

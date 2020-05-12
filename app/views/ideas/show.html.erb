@@ -5,6 +5,24 @@
     
         <p class="card-text"> <%= @idea.description %></p>
 
+         <small>Liked by: <%= @idea.likes.count %></small>
+  <small>
+    <% if @like.present? %>
+      <%= link_to(
+          "Unlike",
+          like_path(@like),
+          method: :delete
+        )
+      %>
+    <% else %>
+      <%= link_to(
+          "Like",
+          idea_likes_path(@idea),
+          method: :post
+        )
+      %>
+    <% end %>
+  </small>
      
     <% if can? :crud, @idea %>
         <%= link_to "Edit idea", edit_idea_path(@idea), class: "btn btn-primary" %>

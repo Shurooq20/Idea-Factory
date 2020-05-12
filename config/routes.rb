@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :ideas do 
 
+    resources :likes, shallow: true, only: [:create, :destroy]
+
     resources :reviews, shallow: true, only: [:create, :destroy]
 
   end
