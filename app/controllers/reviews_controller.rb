@@ -6,7 +6,6 @@ class ReviewsController < ApplicationController
         @review.idea = @idea 
         @review.user = current_user
         if @review.save 
-            ReviewMailer.notify_idea_owner(@reniew).deliver_now 
             redirect_to @idea
         else 
             @reviews = @idea.reviews.order(created_at: :desc)
