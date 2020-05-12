@@ -1,5 +1,9 @@
 class IdeasController < ApplicationController
 
+    before_action :authenticate_user!, except: [:index, :show]
+
+    before_action :authorize!, only: [:edit, :update, :destroy]
+
     def new 
 
         @idea = Idea.new
@@ -9,6 +13,7 @@ class IdeasController < ApplicationController
     def create 
         idea_params = params.require(:idea).permit(:title, :description)
         @idea = Idea.new idea_params
+        @idea.user = current_user
         if @idea.save 
             redirect_to @idea
         else
@@ -34,7 +39,9 @@ class IdeasController < ApplicationController
 
     def show
 
-        @idea = Idea.find params[:id]
+            @idea = Idea.find params[:id]
+            @review = Review.new
+            @reviews = @idea.reviews.order(created_at: :DESC)
         
     end
     ####################
@@ -48,6 +55,10 @@ class IdeasController < ApplicationController
         @idea = Idea.find(params[:id])
         @idea.destroy
         redirect_to ideas_path
+    end
+    
+    def authorize! 
+        redirect_to root_path, alert: 'Not Authorized' unless can?(:crud, Idea)
     end
 
 end
